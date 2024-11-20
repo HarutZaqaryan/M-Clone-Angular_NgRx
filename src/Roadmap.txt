@@ -1,0 +1,4 @@
+							Angular/NgRx - Learning project
+
+	Setting up the application structure
+1. 
