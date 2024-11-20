@@ -1,13 +1,19 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideRegisterRoutes } from './Auth/Components/register/register.routes';
+import { provideState, provideStore } from '@ngrx/store';
 import {
-  provideRegisterRoutes,
-} from './Auth/Components/register/register.routes';
-import { provideStore } from '@ngrx/store';
-import { reducers, metaReducers } from './Shared/Feed/Store/reducers';
+  reducers,
+  metaReducers,
+  authReducer,
+} from './Shared/Feed/Store/reducers';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
@@ -17,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideRegisterRoutes(), // Custom provider
     provideHttpClient(),
     provideStore(reducers, { metaReducers }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-],
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideState({ name: 'auth', reducer: authReducer }),
+  ],
 };
