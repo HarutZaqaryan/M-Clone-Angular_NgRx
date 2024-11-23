@@ -20,7 +20,7 @@ It is a good practise to use seperate file (actionTypes.ts for example) to have 
   														REGISTER_FAILURE = '[Auth] Register failure',
 													     }
 
-2. Writing Actions4=
+2. Writing Actions
    There are a few rules to writing good actions within your application.
 	* Upfront - write actions before developing features to understand and gain a shared knowledge of the feature being implemented.
 	* Divide - categorize actions based on the event source.
@@ -31,7 +31,7 @@ It is a good practise to use seperate file (actionTypes.ts for example) to have 
   				ActionType.REGISTER,
 				props<{ username: string; email: string; password: string }>()
 			   );
-
+// !!! Important - When injecting store, the syntax must be like - private store: Store<IAppState>, where IAppState is out global state interface (Can have any names).
 3. To dispatch an action - We need to inject Store in our component, then use 'dispatch' method // this.store.dispatch(registerAction({username,email,password}).
 
 4. Creating Reducers
@@ -49,6 +49,63 @@ Reducers are pure functions in that they produce the same output for a given inp
 ); 
 
 5. To register created reducer (Standalone API), we need to add this line in providers array in app.config.ts - provideState({ name: 'auth', reducer: authReducer }).
+
+6. To get a specific part from state we need to use Selectors.
+// export const selectFeature = (state: IAppState) => state.auth; - This function extracts the auth slice of the state from the global state tree IAppState.
+~~~ state: IAppState: The global state of your application, which might look something like this: interface IAppState {
+    													auth: IAuthState;
+    													someOtherFeature: IOtherFeatureState;
+    													// other slices of state
+												  } The function returns the 'auth' feature's state. 
+
+			
+// export const authFeatureSelector = createSelector(
+  	selectFeature,
+  	(state: IAuthState) => state.isSubmitting // This function takes the auth slice (which is an object of type IAuthState) and extracts the isSubmitting property.
+   );
+~~~ This uses createSelector from NgRx to compose a new selector that retrieves the isSubmitting property from the auth state.
+The 'authFeatureSelector' is now a reusable selector function that can be used to get the isSubmitting property from the global state.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
