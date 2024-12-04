@@ -55,10 +55,5 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.form.value).subscribe((response) => {
       console.log(response);
     });
-
-    // With 'articles' also throwing error
-    // this.authService.getArticles().subscribe((res) => {
-    //   console.log(res);
-    // });
   }
 }

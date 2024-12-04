@@ -15,6 +15,8 @@ import {
   authReducer,
 } from './Shared/Feed/Store/reducers';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { RegisterEffect } from './Shared/Feed/Store/effects/register.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +27,6 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers, { metaReducers }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState({ name: 'auth', reducer: authReducer }),
+    provideEffects(RegisterEffect),
   ],
 };

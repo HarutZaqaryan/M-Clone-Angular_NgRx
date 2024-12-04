@@ -1,8 +1,16 @@
 import { createAction, props } from '@ngrx/store';
 import { ActionType } from '../actionTypes';
 import { IRegisterRequest } from '../../../../Auth/Models/IRegisterRequest';
+import { ICurrentUser } from '../../Models/ICurrentUser';
 
 export const registerAction = createAction(
   ActionType.REGISTER,
-  props<IRegisterRequest>()
+  props<{ request: IRegisterRequest }>()
 );
+
+export const registerSuccessAction = createAction(
+  ActionType.REGISTER_SUCCESS,
+  props<{ currentUser: ICurrentUser }>()
+);
+
+export const registerFailureAction = createAction(ActionType.REGISTER_FAILURE);
