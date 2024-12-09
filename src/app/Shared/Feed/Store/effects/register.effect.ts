@@ -1,22 +1,20 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   registerAction,
   registerSuccessAction,
 } from '../actions/register.action';
-import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../../../Auth/Services/auth.service';
 import { ICurrentUser } from '../../Models/ICurrentUser';
 import { registerFailureAction } from './../actions/register.action';
 
-@Injectable()
-export class RegisterEffect {
-
-  register$ = createEffect((): any => {
-    this.actions$.pipe(
+export const registerEffect = createEffect(
+  (actions$ = inject(Actions), authService = inject(AuthService)) => {
+    return actions$.pipe(
       ofType(registerAction),
-      exhaustMap(({ request }) => {
-        return this.authService.register(request).pipe(
+      switchMap(({ request }) => {
+        return authService.register(request).pipe(
           map((currentUser: ICurrentUser) => {
             return registerSuccessAction({ currentUser });
           }),
@@ -26,8 +24,6 @@ export class RegisterEffect {
         );
       })
     );
-  });
-
-  constructor(private actions$: Actions, private authService: AuthService) {}
-
-}
+  },
+  { functional: true }
+);

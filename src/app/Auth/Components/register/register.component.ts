@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 import { authFeatureSelector } from '../../../Shared/Feed/Store/selectors';
 import { IAppState } from '../../../Shared/Feed/Store/Models/IAppState';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../Services/auth.service';
+import { IRegisterRequest } from '../../Models/IRegisterRequest';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<IAppState>,
-    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -50,10 +49,9 @@ export class RegisterComponent implements OnInit {
 
   public onSubmit(): void {
     console.log(this.form.value);
-    this.store.dispatch(registerAction(this.form.value));
-
-    this.authService.register(this.form.value).subscribe((response) => {
-      console.log(response);
-    });
+    const request: IRegisterRequest = {
+      user: this.form.value,
+    };
+    this.store.dispatch(registerAction({ request }));
   }
 }

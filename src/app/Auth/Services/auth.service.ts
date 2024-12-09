@@ -15,9 +15,8 @@ export class AuthService {
 
   public register(data: IRegisterRequest): Observable<ICurrentUser> {
     const url = environment.apiUrl + '/users';
-    const payload = { user: data };
     return this.http
-      .post<IAuthResponse>(url, payload)
+      .post<IAuthResponse>(url, data)
       .pipe(map((response: IAuthResponse) => response.user));
   }
 }
