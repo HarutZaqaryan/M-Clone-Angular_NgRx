@@ -1,0 +1,5 @@
+<ul class="error">
+  @for (error of errorMessages(); track $index) {
+  <li>{{ error | firstLetterUp }}</li>
+  }
+</ul>

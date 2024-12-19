@@ -8,7 +8,10 @@
             >Have an account?</a
           >
         </p>
-        Backend errors are here
+        @if (backEndErrors$ | async) {
+        <mc-backend-error-messages [backendErrorsProps]="backEndErrors$ | async">
+        </mc-backend-error-messages>
+        }
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <fieldset>
             <fieldset class="form-group">
