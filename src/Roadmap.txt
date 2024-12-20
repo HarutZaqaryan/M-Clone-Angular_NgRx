@@ -1,0 +1,165 @@
+							Angular/NgRx - Learning project
+
+A good guideline that might help answer the question, "Do I need NgRx Store?" is the SHARI principle:
+
+	* Shared: state that is accessed by many components and services.
+
+	* Hydrated: state that is persisted and rehydrated from external storage.
+
+	* Available: state that needs to be available when re-entering routes.
+
+	* Retrieved: state that must be retrieved with a side-effect.
+
+	* Impacted: state that is impacted by actions from other sources.
+
+1. Adding Action Types
+	* The interface has a single property, the type, represented as a string. The type property is for describing the action that will be dispatched in your application. The value of the 	type comes in the form of [Source] Event and is used to provide a context of what category of action it is, and where an action was dispatched from. You add properties to an action 	to provide additional context or metadata for an action.
+It is a good practise to use seperate file (actionTypes.ts for example) to have constant action types. // export enum ActionType {
+  														REGISTER = '[Auth] Register',
+  														REGISTER_SUCCESS = '[Auth] Register success',
+  														REGISTER_FAILURE = '[Auth] Register failure',
+													     }
+
+2. Writing Actions
+   There are a few rules to writing good actions within your application.
+	* Upfront - write actions before developing features to understand and gain a shared knowledge of the feature being implemented.
+	* Divide - categorize actions based on the event source.
+	* Many - actions are inexpensive to write, so the more actions you write, the better you express flows in your application.
+	* Event-Driven - capture events not commands as you are separating the description of an event and the handling of that event.
+	* Descriptive - provide context that are targeted to a unique event with more detailed information you can use to aid in debugging with the developer tools.
+// export const registerAction = createAction(
+  				ActionType.REGISTER,
+				props<{ username: string; email: string; password: string }>()
+			   );
+
+// !!! Important - When injecting store, the syntax must be like - private store: Store<IAppState>, where IAppState is out global state interface (Can have any names).
+3. To dispatch an action - We need to inject Store in our component, then use 'dispatch' method // this.store.dispatch(registerAction({username,email,password}).
+
+4. Creating Reducers
+Reducers are pure functions in that they produce the same output for a given input. They are without side effects and handle each state transition synchronously. Each reducer function takes the latest Action dispatched, the current state, and determines whether to return a newly modified state or the original state.
+
+// const authReducer = createReducer(
+  initialState,
+  on(
+    registerAction,
+    (state): IAuthState => ({
+      ...state,
+      isSubmitting: true, // Boolean state, that was false originaly and changed to true 
+    })
+  )
+); 
+
+5. To register created reducer (Standalone API), we need to add this line in providers array in app.config.ts - provideState({ name: 'auth', reducer: authReducer }).
+
+6. To get a specific part from state we need to use Selectors.
+// export const selectFeature = (state: IAppState) => state.auth; - This function extracts the auth slice of the state from the global state tree IAppState.
+~~~ state: IAppState: The global state of your application, which might look something like this: interface IAppState {
+    													auth: IAuthState;
+    													someOtherFeature: IOtherFeatureState;
+    													// other slices of state
+												  } The function returns the 'auth' feature's state. 
+
+			
+// export const authFeatureSelector = createSelector(
+  	selectFeature,
+  	(state: IAuthState) => state.isSubmitting // This function takes the auth slice (which is an object of type IAuthState) and extracts the isSubmitting property.
+   );
+~~~ This uses createSelector from NgRx to compose a new selector that retrieves the isSubmitting property from the auth state.
+The 'authFeatureSelector' is now a reusable selector function that can be used to get the isSubmitting property from the global state.
+
+7. To use this selector in our component, we meed to create an observable (e.g. isSubmiting$) and then assign the value from store.
+// this.isSubmiting$ = this.store.pipe(select(authFeatureSelector))
+
+8. Creating Effects
+In a service-based Angular application, components are responsible for interacting with external resources directly through services. Instead, effects provide a way to interact with those services and isolate them from the components. Effects are where you handle tasks such as fetching data, long-running tasks that produce multiple events, and other external interactions where your components don't need explicit knowledge of these interactions.
+Example `
+	export class RegisterEffect {
+  		register$ = createEffect(():any => {
+    		this.actions$.pipe(ofType(registerAction),switchMap(({request})=>{
+       			return this.authService.register(request).pipe(
+        		map((currentUser:ICurrentUser)=>{
+            			return registerSuccessAction({currentUser})
+        		}),
+        		catchError(()=>{
+            			return of(registerFailureAction())
+        		})
+       			)
+    		}))
+  		});
+
+  		constructor(private actions$: Actions,private authService:AuthService) {}
+	}
+
+Here in this example we're getting 'actions$' observable and our custom service(auth), then we're creating an effect (effect is a function). Then we're subscribing to actions$ stream, cutting till 1 action, getting this action's value(in our case 'request'). And only then, we're implementing the logic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,6 +12,11 @@ import {
   registerFailureAction,
   registerSuccessAction,
 } from '../actions/register.action';
+import {
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from '../actions/login.actions';
 
 export interface State {}
 
@@ -46,7 +51,33 @@ export const authReducer = createReducer(
     (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
-      validationErrors:action.errors
+      validationErrors: action.errors,
+    })
+  ),
+  on(
+    loginAction,
+    (state): IAuthState => ({
+      ...state,
+      isSubmitting: true,
+      validationErrors: null,
+    })
+  ),
+  on(
+    loginSuccessAction,
+    (state, action): IAuthState => ({
+      ...state,
+      isSubmitting: false,
+      isLoggedIn: true,
+      currentUser: action.currentUser,
+    })
+  ),
+  on(
+    loginFailureAction,
+    (state, action): IAuthState => ({
+      ...state,
+      isSubmitting: false,
+      isLoggedIn: true,
+      validationErrors: action.errors,
     })
   )
 );

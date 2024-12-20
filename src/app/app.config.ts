@@ -17,16 +17,20 @@ import {
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import * as registration from './Shared/Feed/Store/effects/register.effect';
+import * as login from './Shared/Feed/Store/effects/login.effect';
+import { provideLoginRoutes } from './Auth/Components/login/login.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideRegisterRoutes(), // Custom provider
+    provideRegisterRoutes(), // My Custom provider
+    provideLoginRoutes(), // My Custom provider
     provideHttpClient(),
     provideStore(reducers, { metaReducers }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState({ name: 'auth', reducer: authReducer }),
-    provideEffects(registration)
+    provideEffects(login),
+    provideEffects(registration),
   ],
 };

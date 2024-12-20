@@ -1,6 +1,5 @@
-export interface IRegisterRequest {
+export interface ILoginRequest {
     user: {
-      username: string;
       email: string;
       password: string;
     };
