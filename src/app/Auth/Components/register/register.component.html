@@ -1,3 +1,4 @@
+@let backendErrors = backEndErrors$ | async;
 <div class="auth-page">
   <div class="container page">
     <div class="row">
@@ -8,8 +9,10 @@
             >Have an account?</a
           >
         </p>
-        @if (backEndErrors$ | async) {
-        <mc-backend-error-messages [backendErrorsProps]="backEndErrors$ | async">
+        @if (backEndErrors$) {
+        <mc-backend-error-messages
+          [backendErrorsProps]="backendErrors"
+        >
         </mc-backend-error-messages>
         }
         <form [formGroup]="form" (ngSubmit)="onSubmit()">

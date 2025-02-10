@@ -18,7 +18,6 @@ import { FirstLetterUpPipe } from '../../Pipes/first-letter-up.pipe';
   styleUrl: './backend-error-messages.component.scss',
 })
 export class BackendErrorMessagesComponent {
-  // public backendErrorsProps = input<IBackEndErrors>(null);
   public backendErrors = input<IBackEndErrors | null>(null, {
     alias: 'backendErrorsProps',
   });

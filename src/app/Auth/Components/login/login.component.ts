@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { filter, map, Observable, tap } from 'rxjs';
 import { IBackEndErrors } from '../../../Shared/Feed/Models/IBackEndErrors';
 import { IAppState } from '../../../Shared/Feed/Store/Models/IAppState';
 import { select, Store } from '@ngrx/store';
-import { authFeatureSelector, validationErrorSelector } from '../../../Shared/Feed/Store/selectors';
+import {
+  authFeatureSelector,
+  validationErrorSelector,
+} from '../../../Shared/Feed/Store/selectors';
 import { ILoginRequest } from '../../Models/ILoginRequest';
 import { loginAction } from '../../../Shared/Feed/Store/actions/login.actions';
 import { RouterModule } from '@angular/router';
@@ -14,9 +22,14 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,RouterModule,ReactiveFormsModule, BackendErrorMessagesComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    BackendErrorMessagesComponent,
+  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
@@ -39,7 +52,13 @@ export class LoginComponent implements OnInit {
 
   private initializeValues(): void {
     this.isSubmiting$ = this.store.pipe(select(authFeatureSelector));
-    this.backEndErrors$ = this.store.pipe(select(validationErrorSelector));
+    this.backEndErrors$ = this.store.pipe(
+      select(validationErrorSelector),
+      map((errors) => {
+        const { username, ...rest } = errors || {};
+        return rest;
+      })
+    );
   }
 
   public onSubmit(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -31,7 +31,7 @@ import { BackendErrorMessagesComponent } from '../../../Shared/Feed/Components/b
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public isSubmiting$: Observable<boolean>;
   public backEndErrors$: Observable<IBackEndErrors | null>;
@@ -57,10 +57,13 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.form.value);
     const request: IRegisterRequest = {
       user: this.form.value,
     };
     this.store.dispatch(registerAction({ request }));
+  }
+
+  ngOnDestroy(): void {
+    this.backEndErrors$ = null;
   }
 }
