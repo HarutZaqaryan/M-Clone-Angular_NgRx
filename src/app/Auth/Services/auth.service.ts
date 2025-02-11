@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IRegisterRequest } from '../Models/IRegisterRequest';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ICurrentUser } from '../../Shared/Feed/Models/ICurrentUser';
 import { HttpClient } from '@angular/common/http';
 import { IAuthResponse } from '../Models/IAuthResponse';
@@ -27,8 +27,15 @@ export class AuthService {
   }
 
   public login(data: ILoginRequest): Observable<ICurrentUser> {
+    const loginURL = this.url + '/login';
     return this.http
-      .post<IAuthResponse>(this.url, data)
+      .post<IAuthResponse>(loginURL, data)
       .pipe(map(this.getUser));
+  }
+
+  // TODO: Fix typing!!!
+  public getCurrentUser(): Observable<ICurrentUser> {
+    const userURL = environment.apiUrl + '/user';
+    return this.http.get<any>(userURL).pipe(map(this.getUser));
   }
 }

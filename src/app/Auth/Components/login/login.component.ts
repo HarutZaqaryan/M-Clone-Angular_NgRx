@@ -52,13 +52,7 @@ export class LoginComponent implements OnInit {
 
   private initializeValues(): void {
     this.isSubmiting$ = this.store.pipe(select(authFeatureSelector));
-    this.backEndErrors$ = this.store.pipe(
-      select(validationErrorSelector),
-      map((errors) => {
-        const { username, ...rest } = errors || {};
-        return rest;
-      })
-    );
+    this.backEndErrors$ = this.store.pipe(select(validationErrorSelector));
   }
 
   public onSubmit(): void {
