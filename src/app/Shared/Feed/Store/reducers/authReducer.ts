@@ -2,6 +2,7 @@ import { isDevMode } from '@angular/core';
 import {
   Action,
   ActionReducerMap,
+  createFeature,
   createReducer,
   MetaReducer,
   on,
@@ -22,6 +23,12 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction,
 } from '../actions/getCurrentUser.actions';
+import { IFeedState } from '../Models/IFeedState';
+import {
+  getFeedAction,
+  getFeedFailureAction,
+  getFeedSuccessAction,
+} from '../actions/getFeed.actions';
 
 export interface State {}
 
@@ -107,7 +114,7 @@ export const authReducer = createReducer(
     (state): IAuthState => ({
       ...state,
       isLoading: false,
-      isLoggedIn:false, 
+      isLoggedIn: false,
       currentUser: null,
     })
   )

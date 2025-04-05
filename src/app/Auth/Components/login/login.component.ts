@@ -12,7 +12,7 @@ import { select, Store } from '@ngrx/store';
 import {
   authFeatureSelector,
   validationErrorSelector,
-} from '../../../Shared/Feed/Store/selectors';
+} from '../../../Shared/Feed/Store/selectors/authSelectors';
 import { ILoginRequest } from '../../Models/ILoginRequest';
 import { loginAction } from '../../../Shared/Feed/Store/actions/login.actions';
 import { RouterModule } from '@angular/router';

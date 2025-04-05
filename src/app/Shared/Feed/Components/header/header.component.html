@@ -5,6 +5,12 @@
   <div class="container">
     <a [routerLink]="['/']" class="navbar-brand">Medium</a>
     <ul class="nav navbar-nav pull-xs-right">
+      <li class="nav-item">
+        <a [routerLink]="['/']" class="nav-link">
+          <i class="ion-home"></i>
+          &nbsp; Home
+        </a>
+      </li>
       @if (isLoggedIn) {
       <li class="nav-item">
         <a [routerLink]="['/articles/new']" class="nav-link">
@@ -20,12 +26,13 @@
       </li>
       <li class="nav-item">
         <a [routerLink]="['/profiles', currentUser.username]" class="nav-link">
-          <img
+          <!-- <img
             [src]="currentUser.image"
             alt="User Profile Picture"
             class="user-pic"
-          />
-          &nbsp; {{ currentUser.username }}
+            /> -->
+          <!-- &nbsp;  -->
+          --- {{ currentUser.username }} ---
         </a>
       </li>
       } @if (isAnonymous) {

@@ -10,4 +10,8 @@ export enum ActionType {
   GET_CURRENT_USER = '[Auth] Get Current User',
   GET_CURRENT_USER_SUCCESS = '[Auth] Get Current User success',
   GET_CURRENT_USER_FAILURE = '[Auth] Get Current User failure',
+
+  GET_FEED = '[Feed] Get Feed',
+  GET_FEED_SUCCESS = '[Feed] Get Feed success',
+  GET_FEED_FAILURE = '[Feed] Get Feed failure',
 }

@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 import {
   authFeatureSelector,
   validationErrorSelector,
-} from '../../../Shared/Feed/Store/selectors';
+} from '../../../Shared/Feed/Store/selectors/authSelectors';
 import { IAppState } from '../../../Shared/Feed/Store/Models/IAppState';
 import { CommonModule } from '@angular/common';
 import { IRegisterRequest } from '../../Models/IRegisterRequest';

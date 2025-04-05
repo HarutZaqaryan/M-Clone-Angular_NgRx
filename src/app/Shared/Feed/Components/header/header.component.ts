@@ -7,7 +7,7 @@ import {
   currentUserSelector,
   isAnonymousSelector,
   isLoggedInSelector,
-} from '../../Store/selectors';
+} from '../../Store/selectors/authSelectors';
 import { CommonModule } from '@angular/common';
 import { ICurrentUser } from '../../Models/ICurrentUser';
 

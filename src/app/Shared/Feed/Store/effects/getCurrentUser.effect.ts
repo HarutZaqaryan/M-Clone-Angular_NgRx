@@ -11,43 +11,6 @@ import {
   getCurrentUserSuccessAction,
 } from '../actions/getCurrentUser.actions';
 
-// export const getCurrentUserEffect = createEffect(
-//   (
-//     persistanceService = inject(PersistanceService),
-//     actions$ = inject(Actions),
-//     authService = inject(AuthService)
-//   ): Observable<any> => {
-//     return actions$.pipe(
-//       ofType(getCurrentUserAction),
-//       tap(() => console.log('Tap 1')),
-//       switchMap(() => {
-//         try {
-//           console.log('Here 1');
-
-//           const token = persistanceService.get('accessToken');
-//           if (!token) {
-//             return of(getCurrentUserFailureAction());
-//           }
-
-//           return authService.getCurrentUser().pipe(
-//             tap(() => console.log('tap')),
-//             map((currentUser: ICurrentUser) => {
-//               console.log('here 3');
-//               return getCurrentUserSuccessAction({ currentUser });
-//             }),
-//             catchError((errorResponse: HttpErrorResponse) => {
-//               return of(getCurrentUserFailureAction());
-//             })
-//           );
-//         } catch (err) {
-//           console.log('errorerrorerror',err);
-//         }
-//       })
-//     );
-//   },
-//   { functional: true }
-// );
-
 export const getCurrentUserEffect = createEffect(
   (
     persistanceService = inject(PersistanceService),

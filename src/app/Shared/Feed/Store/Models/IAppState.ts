@@ -1,5 +1,7 @@
-import { IAuthState } from "./IAuthState";
+import { IAuthState } from './IAuthState';
+import { IFeedState } from './IFeedState';
 
 export interface IAppState {
-    auth:IAuthState
+  auth: IAuthState;
+  feed: IFeedState;
 }
