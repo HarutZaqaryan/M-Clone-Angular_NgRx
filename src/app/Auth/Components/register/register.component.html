@@ -10,9 +10,7 @@
           >
         </p>
         @if (backEndErrors$) {
-        <mc-backend-error-messages
-          [backendErrorsProps]="backendErrors"
-        >
+        <mc-backend-error-messages [backendErrorsProps]="backendErrors">
         </mc-backend-error-messages>
         }
         <form [formGroup]="form" (ngSubmit)="onSubmit()">

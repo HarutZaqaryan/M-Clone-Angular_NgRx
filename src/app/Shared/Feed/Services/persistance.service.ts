@@ -12,7 +12,7 @@ export class PersistanceService {
       return JSON.parse(this.localStorage.getItem(key));
     } catch (e) {
       console.error('Error occurs during getting data from LocalStorage', e);
-      return null
+      return null;
     }
   }
 

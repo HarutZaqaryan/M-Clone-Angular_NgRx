@@ -8,9 +8,8 @@ describe('GlobalFeedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GlobalFeedComponent]
-    })
-    .compileComponents();
+      imports: [GlobalFeedComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GlobalFeedComponent);
     component = fixture.componentInstance;

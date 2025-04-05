@@ -6,7 +6,7 @@ import { AuthInterceptor } from './authInterceptor.service';
 describe('Service: AuthInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthInterceptor]
+      providers: [AuthInterceptor],
     });
   });
 
