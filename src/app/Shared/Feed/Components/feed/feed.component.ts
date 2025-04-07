@@ -9,11 +9,13 @@ import {
 import { RouterModule } from '@angular/router';
 import { IArticle } from '../../../../Articles/Models/IArticle';
 import { IFeedResponse } from '../../Models/IFeed';
+import { ErrorMessageComponent } from "../error-message/error-message.component";
+import { LoadingComponent } from "../loading/loading.component";
 
 @Component({
   selector: 'ms-feed',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, ErrorMessageComponent, LoadingComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })

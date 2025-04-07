@@ -2,7 +2,8 @@
 <!-- @let data = feedData$(); -->
 
 <div class="container">
-  @if (loading) { Loadnig... } @if (error) { {{ error }} } @if(mockedArticles) {
+  @if (loading) { <mc-loading /> } @if (error) { <mc-error-message /> }
+  @if(mockedArticles) {
   <h1>Articles Count: {{ mockedArticles.articlesCount }}</h1>
   @for(article of mockedArticles.articles; track article.title ) {
   <div class="article-preview">
