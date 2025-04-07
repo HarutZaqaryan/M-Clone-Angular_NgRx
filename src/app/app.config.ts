@@ -14,9 +14,9 @@ import {
 import { provideRegisterRoutes } from './Auth/Components/register/register.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import {
-  metaReducers,
+  // metaReducers,
   authReducer,
-  reducers,
+  authFeature,
 } from './Shared/Feed/Store/reducers/authReducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
@@ -28,24 +28,23 @@ import { provideLoginRoutes } from './Auth/Components/login/login.routes';
 import { AuthInterceptor } from './Shared/Feed/Services/authInterceptor.service';
 import { provideGlobalFeedRoutes } from './GlobalFeed/Components/global-feed/global-feed.routes';
 import { feedFeature } from './Shared/Feed/Store/reducers/feedReducer';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-
     provideRouter(routes),
     provideRegisterRoutes(), // My Custom provider
     provideLoginRoutes(), // My Custom provider
     provideGlobalFeedRoutes(), // My Custom provider
-
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
     },
-
-    provideStore(reducers, { metaReducers }),
+    provideStore({ router: routerReducer }),
+    provideState(authFeature),
     provideState(feedFeature),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState({ name: 'auth', reducer: authReducer }),
@@ -53,5 +52,6 @@ export const appConfig: ApplicationConfig = {
     provideEffects(login),
     provideEffects(registration),
     provideEffects(feed),
+    provideRouterStore(),
   ],
 };

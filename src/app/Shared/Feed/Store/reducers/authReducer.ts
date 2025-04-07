@@ -23,12 +23,6 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction,
 } from '../actions/getCurrentUser.actions';
-import { IFeedState } from '../Models/IFeedState';
-import {
-  getFeedAction,
-  getFeedFailureAction,
-  getFeedSuccessAction,
-} from '../actions/getFeed.actions';
 
 export interface State {}
 
@@ -120,11 +114,16 @@ export const authReducer = createReducer(
   )
 );
 
-export function reducers(
-  state: IAuthState,
-  action: Action
-): ActionReducerMap<State> {
-  return authReducer(state, action);
-}
+// export function reducers(
+//   state: IAuthState,
+//   action: Action
+// ): ActionReducerMap<State> {
+//   return authReducer(state, action);
+// }
 
-export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];
+export const authFeature = createFeature({
+  name: 'auth',
+  reducer: authReducer,
+});
+
+// export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

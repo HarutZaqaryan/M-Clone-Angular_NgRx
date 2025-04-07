@@ -10,5 +10,5 @@ import { BannerComponent } from "../../../Shared/Feed/Components/banner/banner.c
   styleUrl: './global-feed.component.scss',
 })
 export class GlobalFeedComponent {
-  protected apiUrl = '/articles/feed';
+  protected apiUrl = '/articles';
 }
