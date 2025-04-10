@@ -114,16 +114,8 @@ export const authReducer = createReducer(
   )
 );
 
-// export function reducers(
-//   state: IAuthState,
-//   action: Action
-// ): ActionReducerMap<State> {
-//   return authReducer(state, action);
-// }
-
 export const authFeature = createFeature({
   name: 'auth',
   reducer: authReducer,
 });
 
-// export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

@@ -14,4 +14,8 @@ export enum ActionType {
   GET_FEED = '[Feed] Get Feed',
   GET_FEED_SUCCESS = '[Feed] Get Feed success',
   GET_FEED_FAILURE = '[Feed] Get Feed failure',
+
+  GET_TAGS = '[Tags] Get Tags',
+  GET_TAGS_SUCCESS = '[Tags] Get Tags success',
+  GET_TAGS_FAILURE = '[Tags] Get Tags failure',
 }
