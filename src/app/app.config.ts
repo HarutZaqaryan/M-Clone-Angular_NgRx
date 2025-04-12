@@ -31,6 +31,8 @@ import { provideGlobalFeedRoutes } from './GlobalFeed/Components/global-feed/glo
 import { feedFeature } from './Shared/Feed/Store/reducers/feedReducer';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { tagsFeature } from './Shared/Feed/Store/reducers/tagsReducer';
+import { provideUserFeedRoutes } from './GlobalFeed/Components/user-feed/user-feed.routes';
+import { provideTagFeedRoutes } from './GlobalFeed/Components/tag-feed/tag-feed.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -39,6 +41,8 @@ export const appConfig: ApplicationConfig = {
     provideRegisterRoutes(), // My Custom provider
     provideLoginRoutes(), // My Custom provider
     provideGlobalFeedRoutes(), // My Custom provider
+    provideUserFeedRoutes(), // My Custom provider
+    provideTagFeedRoutes(), // My Custom provider
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,

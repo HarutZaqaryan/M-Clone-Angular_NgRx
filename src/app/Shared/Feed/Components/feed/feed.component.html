@@ -1,10 +1,9 @@
 @let loading = isLoading$(); @let error = feedError$(); @let data = feedData$();
 
 <div class="container">
-  @if (loading) { <mc-loading /> } @if (error) { <mc-error-message /> }
-  @if(data) {
-  <h1>Articles Count: {{ data.articlesCount }}</h1>
-  @for(article of data.articles; track article.title ) {
+  @if (loading) { <mc-loading /> } @if (error) { <mc-error-message /> } @if(data
+  && data.articlesCount > 0) { @for(article of data.articles; track
+  article.title ) {
   <div class="article-preview">
     <div class="article-meta">
       <a [routerLink]="['/profiles', article.author.username]">
@@ -25,7 +24,7 @@
       <span>Read more...</span>
     </a>
   </div>
-  } }
+  } } @else { There are no articles yet }
   <mc-pagination
     [totalProps]="data.articlesCount"
     [limitProps]="itemsPerPage"
