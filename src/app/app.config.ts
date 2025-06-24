@@ -25,6 +25,7 @@ import * as currentUser from './Shared/Feed/Store/effects/getCurrentUser.effect'
 import * as feed from './Shared/Feed/Store/effects/getFeed.effect';
 import * as tags from './Shared/Feed/Store/effects/getTags.effects';
 import * as articleDetails from './Shared/Feed/Store/effects/getArticleDetails.effect';
+import * as deleteArticleDetails from './Shared/Feed/Store/effects/deleteArticleDetails.effect';
 import { provideLoginRoutes } from './Auth/Components/login/login.routes';
 import { AuthInterceptor } from './Shared/Feed/Services/authInterceptor.service';
 import { provideGlobalFeedRoutes } from './GlobalFeed/Components/global-feed/global-feed.routes';
@@ -62,6 +63,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(registration),
     provideEffects(feed),
     provideEffects(articleDetails),
+    provideEffects(deleteArticleDetails),
     provideEffects(tags),
     provideRouterStore(),
   ],

@@ -14,7 +14,7 @@
         }}</a>
         <p class="date">{{ article.createdAt }}</p>
       </div>
-      @if(isAuthor){
+      @if(true){
       <span>
         <a
           [routerLink]="['/article', article.slug, 'edit']"
@@ -23,7 +23,7 @@
           <i class="ion-edit"></i>
           Edit Article
         </a>
-        DELETE
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteArticle()">Delete Article</button>
       </span>
       } }
     </div>

@@ -6,7 +6,7 @@ import {
   getArticleDetailsAction,
   getArticleDetailsFailure,
   getArticleDetailsSuccess,
-} from '../actions/getArticleDetails.actions';
+} from '../actions/articleDetails.actions';
 import { IArticle } from '../../../../Articles/Models/IArticle';
 
 export const getArticleDetailsEffect = createEffect(

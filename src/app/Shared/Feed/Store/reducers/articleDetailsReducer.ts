@@ -4,7 +4,7 @@ import {
   getArticleDetailsAction,
   getArticleDetailsFailure,
   getArticleDetailsSuccess,
-} from '../actions/getArticleDetails.actions';
+} from '../actions/articleDetails.actions';
 import { routerNavigationAction } from '@ngrx/router-store';
 
 const initialArticleDetailsState: IArticleDetailsState = {

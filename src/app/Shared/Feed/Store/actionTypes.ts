@@ -22,4 +22,8 @@ export enum ActionType {
   GET_ARTICLE_DETAILS = '[Article Details] Get Article Details',
   GET_ARTICLE_DETAILS_SUCCESS = '[Article Details] Get Article Details Success',
   GET_ARTICLE_DETAILS_FAILURE = '[Article Details] Get Article Details Failure',
+
+  DELETE_ARTICLE_DETAILS = '[Article Details] Delete Article Details',
+  DELETE_ARTICLE_DETAILS_SUCCESS = '[Article Details] Delete Article Details Success',
+  DELETE_ARTICLE_DETAILS_FAILURE = '[Article Details] Delete Article Details Failure',
 }
