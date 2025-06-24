@@ -7,14 +7,12 @@ import {
   isLoadingSelector,
 } from '../../Store/selectors/feedSelectors';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { IFeedResponse } from '../../Models/IFeed';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { LoadingComponent } from '../loading/loading.component';
-import { MOCKED_ARTICLES } from '../../../../Mocks/mocked-articles';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { environment } from '../../../../../environments/environment';
 import queryString from 'query-string';
-import { TagListComponent } from "../tag-list/tag-list.component";
+import { TagListComponent } from '../tag-list/tag-list.component';
 @Component({
   selector: 'ms-feed',
   standalone: true,
@@ -23,8 +21,8 @@ import { TagListComponent } from "../tag-list/tag-list.component";
     ErrorMessageComponent,
     LoadingComponent,
     PaginationComponent,
-    TagListComponent
-],
+    TagListComponent,
+  ],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })

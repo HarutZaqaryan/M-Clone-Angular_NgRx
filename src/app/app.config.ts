@@ -14,7 +14,6 @@ import {
 import { provideRegisterRoutes } from './Auth/Components/register/register.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import {
-  // metaReducers,
   authReducer,
   authFeature,
 } from './Shared/Feed/Store/reducers/authReducer';
@@ -25,6 +24,7 @@ import * as login from './Shared/Feed/Store/effects/login.effect';
 import * as currentUser from './Shared/Feed/Store/effects/getCurrentUser.effect';
 import * as feed from './Shared/Feed/Store/effects/getFeed.effect';
 import * as tags from './Shared/Feed/Store/effects/getTags.effects';
+import * as articleDetails from './Shared/Feed/Store/effects/getArticleDetails.effect';
 import { provideLoginRoutes } from './Auth/Components/login/login.routes';
 import { AuthInterceptor } from './Shared/Feed/Services/authInterceptor.service';
 import { provideGlobalFeedRoutes } from './GlobalFeed/Components/global-feed/global-feed.routes';
@@ -33,6 +33,7 @@ import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { tagsFeature } from './Shared/Feed/Store/reducers/tagsReducer';
 import { provideUserFeedRoutes } from './GlobalFeed/Components/user-feed/user-feed.routes';
 import { provideTagFeedRoutes } from './GlobalFeed/Components/tag-feed/tag-feed.routes';
+import { articleDetailsFeature } from './Shared/Feed/Store/reducers/articleDetailsReducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -49,16 +50,18 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStore({ router: routerReducer }),
+    // provideState({ name: 'auth', reducer: authReducer }),
     provideState(authFeature),
     provideState(feedFeature),
     provideState(tagsFeature),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideState({ name: 'auth', reducer: authReducer }),
+    provideState(articleDetailsFeature),
     provideEffects(currentUser),
     provideEffects(login),
     provideEffects(registration),
     provideEffects(feed),
+    provideEffects(articleDetails),
     provideEffects(tags),
     provideRouterStore(),
   ],

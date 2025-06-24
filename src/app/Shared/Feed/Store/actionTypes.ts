@@ -18,4 +18,8 @@ export enum ActionType {
   GET_TAGS = '[Tags] Get Tags',
   GET_TAGS_SUCCESS = '[Tags] Get Tags success',
   GET_TAGS_FAILURE = '[Tags] Get Tags failure',
+
+  GET_ARTICLE_DETAILS = '[Article Details] Get Article Details',
+  GET_ARTICLE_DETAILS_SUCCESS = '[Article Details] Get Article Details Success',
+  GET_ARTICLE_DETAILS_FAILURE = '[Article Details] Get Article Details Failure',
 }

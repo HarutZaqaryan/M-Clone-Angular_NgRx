@@ -1,0 +1,48 @@
+@let article = article$(); @let loading = isLoading$(); @let error = error$();
+@let isAuthor = isAuthor$();
+<!-- @let isAuthor = isAuthor$ | async; -->
+
+<div class="article-page">
+  <div class="banner">
+    <div class="container">
+      @if(article) {
+      <h1>{{ article.title }}</h1>
+      <div class="article-meta">
+        <span>By: </span
+        ><a [routerLink]="['/profiles', article.author.username]">{{
+          article.author.username
+        }}</a>
+        <p class="date">{{ article.createdAt }}</p>
+      </div>
+      @if(isAuthor){
+      <span>
+        <a
+          [routerLink]="['/article', article.slug, 'edit']"
+          class="btn btn-outline-secondary btn-sm"
+        >
+          <i class="ion-edit"></i>
+          Edit Article
+        </a>
+        DELETE
+      </span>
+      } }
+    </div>
+  </div>
+
+  <div class="container-page">
+    @if (loading) {
+    <mc-loading />
+    } @if (error) {
+    <mc-error-message [message]="error" />
+    } @if(article){
+    <div class="row article-contetnt">
+      <div class="col-xs-12">
+        <div>
+          <p>{{ article.body }}</p>
+        </div>
+        <mc-tag-list [tagProps]="[article.tagList]" />
+      </div>
+    </div>
+    }
+  </div>
+</div>
