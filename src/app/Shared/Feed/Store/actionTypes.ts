@@ -26,4 +26,12 @@ export enum ActionType {
   DELETE_ARTICLE_DETAILS = '[Article Details] Delete Article Details',
   DELETE_ARTICLE_DETAILS_SUCCESS = '[Article Details] Delete Article Details Success',
   DELETE_ARTICLE_DETAILS_FAILURE = '[Article Details] Delete Article Details Failure',
+
+  CREATE_ARTICLE = '[Create Article] Create Article',
+  CREATE_ARTICLE_SUCCESS = '[Create Article] Create Article Success',
+  CREATE_ARTICLE_FAILURE = '[Create Article] Create Article Failure',
+
+  UPDATE_ARTICLE = '[Edit Article] Update Article',
+  UPDATE_ARTICLE_SUCCESS = '[Edit Article] Update Article Success',
+  UPDATE_ARTICLE_FAILURE = '[Edit Article] Update Article Failure',
 }

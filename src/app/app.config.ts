@@ -14,7 +14,6 @@ import {
 import { provideRegisterRoutes } from './Auth/Components/register/register.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import {
-  authReducer,
   authFeature,
 } from './Shared/Feed/Store/reducers/authReducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -26,6 +25,7 @@ import * as feed from './Shared/Feed/Store/effects/getFeed.effect';
 import * as tags from './Shared/Feed/Store/effects/getTags.effects';
 import * as articleDetails from './Shared/Feed/Store/effects/getArticleDetails.effect';
 import * as deleteArticleDetails from './Shared/Feed/Store/effects/deleteArticleDetails.effect';
+import * as createArticle from './Shared/Feed/Store/effects/createArticle.effect';
 import { provideLoginRoutes } from './Auth/Components/login/login.routes';
 import { AuthInterceptor } from './Shared/Feed/Services/authInterceptor.service';
 import { provideGlobalFeedRoutes } from './GlobalFeed/Components/global-feed/global-feed.routes';
@@ -35,11 +35,15 @@ import { tagsFeature } from './Shared/Feed/Store/reducers/tagsReducer';
 import { provideUserFeedRoutes } from './GlobalFeed/Components/user-feed/user-feed.routes';
 import { provideTagFeedRoutes } from './GlobalFeed/Components/tag-feed/tag-feed.routes';
 import { articleDetailsFeature } from './Shared/Feed/Store/reducers/articleDetailsReducer';
+import { provideCreateArticleRoutes } from './Articles/Components/create-article/create-article.routes';
+import { createArticleFeature } from './Shared/Feed/Store/reducers/createArticleReducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideCreateArticleRoutes(), // My Custom provider
     provideRegisterRoutes(), // My Custom provider
     provideLoginRoutes(), // My Custom provider
     provideGlobalFeedRoutes(), // My Custom provider
@@ -51,13 +55,12 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true,
     },
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideStore({ router: routerReducer }),
-    // provideState({ name: 'auth', reducer: authReducer }),
     provideState(authFeature),
     provideState(feedFeature),
     provideState(tagsFeature),
     provideState(articleDetailsFeature),
+    provideState(createArticleFeature),
     provideEffects(currentUser),
     provideEffects(login),
     provideEffects(registration),
@@ -65,6 +68,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(articleDetails),
     provideEffects(deleteArticleDetails),
     provideEffects(tags),
+    provideEffects(createArticle),
     provideRouterStore(),
   ],
 };
