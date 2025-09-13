@@ -1,6 +1,6 @@
 import { IBackEndErrors } from "../../Models/IBackEndErrors";
 
 export interface ICreateArticleState {
-  isSubmitting: boolean;
+  isSubmiting: boolean;
   validationErrors: IBackEndErrors | null;
 }

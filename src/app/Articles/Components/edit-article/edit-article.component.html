@@ -1,0 +1,11 @@
+<mc-loading [isLoadingProps]="isLoading$()"></mc-loading>
+@if (initialValues) {
+<mc-article-form
+  [initialValuesProps]="initialValues"
+  [errorsProps]="backendErrors$()"
+  [isSubmitingProps]="isSubmiting$()"
+  (articleSubmitEvent)="onSubmit(slug, $event)"
+/>
+} @else {
+<p>Something went wrong</p>
+}

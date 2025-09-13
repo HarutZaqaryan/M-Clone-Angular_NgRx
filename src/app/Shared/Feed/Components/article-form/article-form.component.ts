@@ -1,4 +1,11 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
 import { IArticleInput } from '../../Models/IArticleInput';
 import { IBackEndErrors } from '../../Models/IBackEndErrors';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -11,11 +18,11 @@ import { BackendErrorMessagesComponent } from '../backend-error-messages/backend
   imports: [ReactiveFormsModule, BackendErrorMessagesComponent],
   standalone: true,
 })
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent {
   public initialValues = input<IArticleInput | null>(null, {
     alias: 'initialValuesProps',
   });
-  public isSubmitting = input<boolean>(false, { alias: 'isSubmittingProps' });
+  public isSubmiting = input<boolean>(false, { alias: 'isSubmitingProps' });
   public errors = input<IBackEndErrors | null>(null, {
     alias: 'errorsProps',
   });
@@ -26,23 +33,38 @@ export class ArticleFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {}
-
-  ngOnInit() {
-    this.initializeForm();
-  }
-
-  private initializeForm(): void {
+  constructor() {
     this.form = this.fb.group({
-      title: [this.initialValues()?.title || '', []],
-      description: [this.initialValues()?.description || '', []],
-      body: [this.initialValues()?.body || '', []],
-      tagList: [this.initialValues()?.tagList.join(' ') || [], []],
+      title: [''],
+      description: [''],
+      body: [''],
+      tagList: [[]],
+    });
+    effect(() => {
+      const values = this.initialValues();
+      if (values) {
+        this.form?.patchValue({
+          title: values.title,
+          description: values.description,
+          body: values.body,
+          tagList: values.tagList.map((tag) => `#${tag}`).join(', '),
+        });
+      }
     });
   }
 
   public onSubmit(): void {
-    this.articleSubmitEvent.emit(this.form.value);
+    const trimedTaglist = this.deepTrim(this.form.value.tagList);
+
+    const preparedFormValeue: IArticleInput = {
+      ...this.form.value,
+      tagList: trimedTaglist.length ? trimedTaglist.split(',') : [],
+    };
+    this.articleSubmitEvent.emit(preparedFormValeue);
     this.form.reset();
+  }
+
+  private deepTrim(str: string): string {
+    return str.replace(/\s+/g, '');
   }
 }

@@ -36,7 +36,7 @@
               <input
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Enter tags"
+                placeholder="Enter tags (Seperate with a comma please)"
                 formControlName="tagList"
               />
             </fieldset>
@@ -44,7 +44,7 @@
               <button
                 type="submit"
                 class="btn btn-lg pull-xs-right btn-primary"
-                [disabled]="form.invalid || isSubmitting()"
+                [disabled]="form.invalid || isSubmiting()"
               >
                 Publish Article
               </button>

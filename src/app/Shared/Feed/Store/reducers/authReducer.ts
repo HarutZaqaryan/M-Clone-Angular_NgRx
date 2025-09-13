@@ -30,7 +30,7 @@ const initialState: IAuthState = {
   currentUser: null,
   isLoading: false,
   isLoggedIn: null,
-  isSubmitting: false,
+  isSubmiting: false,
   validationErrors: null,
 };
 
@@ -40,7 +40,7 @@ export const authReducer = createReducer(
     registerAction,
     (state): IAuthState => ({
       ...state,
-      isSubmitting: true,
+      isSubmiting: true,
       validationErrors: null,
     })
   ),
@@ -48,7 +48,7 @@ export const authReducer = createReducer(
     registerSuccessAction,
     (state, action): IAuthState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
       isLoggedIn: true,
       currentUser: action.currentUser,
     })
@@ -57,7 +57,7 @@ export const authReducer = createReducer(
     registerFailureAction,
     (state, action): IAuthState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
       validationErrors: action.errors,
     })
   ),
@@ -65,7 +65,7 @@ export const authReducer = createReducer(
     loginAction,
     (state): IAuthState => ({
       ...state,
-      isSubmitting: true,
+      isSubmiting: true,
       validationErrors: null,
     })
   ),
@@ -73,7 +73,7 @@ export const authReducer = createReducer(
     loginSuccessAction,
     (state, action): IAuthState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
       isLoggedIn: true,
       currentUser: action.currentUser,
     })
@@ -82,7 +82,7 @@ export const authReducer = createReducer(
     loginFailureAction,
     (state, action): IAuthState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
       isLoggedIn: false,
       validationErrors: action.errors,
     })
@@ -118,4 +118,3 @@ export const authFeature = createFeature({
   name: 'auth',
   reducer: authReducer,
 });
-

@@ -31,7 +31,11 @@ export enum ActionType {
   CREATE_ARTICLE_SUCCESS = '[Create Article] Create Article Success',
   CREATE_ARTICLE_FAILURE = '[Create Article] Create Article Failure',
 
-  UPDATE_ARTICLE = '[Edit Article] Update Article',
-  UPDATE_ARTICLE_SUCCESS = '[Edit Article] Update Article Success',
-  UPDATE_ARTICLE_FAILURE = '[Edit Article] Update Article Failure',
+  GET_ARTICLE = '[Get Article] Get Article',
+  GET_ARTICLE_SUCCESS = '[Get Article] Get Article Success',
+  GET_ARTICLE_FAILURE = '[Get Article] Get Article Failure',
+
+  EDIT_ARTICLE = '[Edit Article] Edit Article',
+  EDIT_ARTICLE_SUCCESS = '[Edit Article] Edit Article Success',
+  EDIT_ARTICLE_FAILURE = '[Edit Article] Edit Article Failure',
 }

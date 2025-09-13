@@ -6,7 +6,7 @@ export const selectFeature = (state: IAppState) => state.auth;
 
 export const authFeatureSelector = createSelector(
   selectFeature,
-  (state: IAuthState) => state.isSubmitting
+  (state: IAuthState) => state.isSubmiting
 );
 
 export const validationErrorSelector = createSelector(

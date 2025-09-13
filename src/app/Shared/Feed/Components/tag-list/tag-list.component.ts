@@ -10,4 +10,10 @@ import { PopularTagType } from '../../Models/popularTag.type';
 })
 export class TagListComponent {
   public readonly tags = input<PopularTagType[]>([], { alias: 'tagProps' });
+
+  constructor() {
+    effect(() => {
+      console.log('Tags from tag list component', this.tags());
+    });
+  }
 }

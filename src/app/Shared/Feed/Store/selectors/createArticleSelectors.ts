@@ -4,9 +4,9 @@ import { ICreateArticleState } from '../Models/ICreateArticleState';
 
 export const selectFeature = (state: IAppState) => state.createArticle;
 
-export const isSubmittingSelector = createSelector(
+export const isSubmitingSelector = createSelector(
   selectFeature,
-  (state: ICreateArticleState) => state.isSubmitting
+  (state: ICreateArticleState) => state.isSubmiting
 );
 
 export const validationErrorsSelector = createSelector(

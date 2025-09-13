@@ -1,10 +1,9 @@
+import { IArticle } from '../../../../Articles/Models/IArticle';
 import { IBackEndErrors } from '../../Models/IBackEndErrors';
-import { ICurrentUser } from '../../Models/ICurrentUser';
 
-export interface IAuthState {
-  currentUser: ICurrentUser | null;
+export interface IEditArticleState {
   isLoading: boolean;
-  isLoggedIn: boolean | null;
+  article: IArticle | null;
   isSubmiting: boolean;
   validationErrors: IBackEndErrors | null;
 }

@@ -7,7 +7,7 @@ import {
 } from '../actions/createArticle.actions';
 
 const initialState: ICreateArticleState = {
-  isSubmitting: false,
+  isSubmiting: false,
   validationErrors: null,
 };
 
@@ -17,21 +17,21 @@ const createArticleReducer = createReducer(
     createArticleAction,
     (state): ICreateArticleState => ({
       ...state,
-      isSubmitting: true,
+      isSubmiting: true,
     })
   ),
   on(
     createArticleSuccessAction,
     (state): ICreateArticleState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
     })
   ),
   on(
     createArticleFailureAction,
     (state, action): ICreateArticleState => ({
       ...state,
-      isSubmitting: false,
+      isSubmiting: false,
       validationErrors: action.errors,
     })
   )

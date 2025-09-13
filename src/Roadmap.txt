@@ -44,7 +44,7 @@ Reducers are pure functions in that they produce the same output for a given inp
     registerAction,
     (state): IAuthState => ({
       ...state,
-      isSubmitting: true, // Boolean state, that was false originaly and changed to true 
+      isSubmiting: true, // Boolean state, that was false originaly and changed to true 
     })
   )
 ); 
@@ -62,10 +62,10 @@ Reducers are pure functions in that they produce the same output for a given inp
 			
 // export const authFeatureSelector = createSelector(
   	selectFeature,
-  	(state: IAuthState) => state.isSubmitting // This function takes the auth slice (which is an object of type IAuthState) and extracts the isSubmitting property.
+  	(state: IAuthState) => state.isSubmiting // This function takes the auth slice (which is an object of type IAuthState) and extracts the isSubmiting property.
    );
-~~~ This uses createSelector from NgRx to compose a new selector that retrieves the isSubmitting property from the auth state.
-The 'authFeatureSelector' is now a reusable selector function that can be used to get the isSubmitting property from the global state.
+~~~ This uses createSelector from NgRx to compose a new selector that retrieves the isSubmiting property from the auth state.
+The 'authFeatureSelector' is now a reusable selector function that can be used to get the isSubmiting property from the global state.
 
 7. To use this selector in our component, we meed to create an observable (e.g. isSubmiting$) and then assign the value from store.
 // this.isSubmiting$ = this.store.pipe(select(authFeatureSelector))
